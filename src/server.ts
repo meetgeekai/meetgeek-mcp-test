@@ -80,107 +80,109 @@ mcpServer.tool(
 );
 
 // 1. List Meetings
-mcpServer.resource(
+mcpServer.tool(
   "meetings",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/meetings?cursor={cursor}&limit={limit}`,
-    { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    cursor: z.string().optional(),
+    limit: z.number().optional()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { cursor, limit } = params as { cursor?: string; limit?: number };
+    const { cursor, limit } = args as { cursor?: string; limit?: number };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/meetings`,
       { headers: { Authorization: `Bearer ${key}` }, params: { cursor, limit } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
-
-
 // 2. Meeting Details
-mcpServer.resource(
+mcpServer.tool(
   "meetingDetails",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/meetings/{meetingId}`, { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    meetingId: z.string()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { meetingId } = params as { meetingId: string };
+    const { meetingId } = args as { meetingId: string };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/meetings/${meetingId}`,
       { headers: { Authorization: `Bearer ${key}` } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
 // 3. Transcript
-mcpServer.resource(
+mcpServer.tool(
   "transcript",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/meetings/{meetingId}/transcript?cursor={cursor}&limit={limit}`, { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    meetingId: z.string(),
+    cursor: z.string().optional(),
+    limit: z.number().optional()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { meetingId, cursor, limit } = params as unknown as { meetingId: string; cursor?: string; limit?: number };
+    const { meetingId, cursor, limit } = args as { meetingId: string; cursor?: string; limit?: number };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/meetings/${meetingId}/transcript`,
       { headers: { Authorization: `Bearer ${key}` }, params: { cursor, limit } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
 // 4. Highlights
-mcpServer.resource(
+mcpServer.tool(
   "highlights",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/meetings/{meetingId}/highlights`, { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    meetingId: z.string()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { meetingId } = params as { meetingId: string };
+    const { meetingId } = args as { meetingId: string };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/meetings/${meetingId}/highlights`,
       { headers: { Authorization: `Bearer ${key}` } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
 // 5. Summary
-mcpServer.resource(
+mcpServer.tool(
   "summary",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/meetings/{meetingId}/summary`, { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    meetingId: z.string()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { meetingId } = params as { meetingId: string };
+    const { meetingId } = args as { meetingId: string };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/meetings/${meetingId}/summary`,
       { headers: { Authorization: `Bearer ${key}` } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
 // 6. Team Meetings
-mcpServer.resource(
+mcpServer.tool(
   "teamMeetings",
-  new ResourceTemplate(
-    `${MEETGEEK_BASE_URL}/v1/teams/{teamId}/meetings?cursor={cursor}&limit={limit}`, { list: undefined }
-  ),
-  async (uri, params) => {
+  {
+    teamId: z.string(),
+    cursor: z.string().optional(),
+    limit: z.number().optional()
+  },
+  async (args, extra) => {
     const key = transport.apiKey!;
-    const { teamId, cursor, limit } = params as unknown as { teamId: string; cursor?: string; limit?: number };
+    const { teamId, cursor, limit } = args as { teamId: string; cursor?: string; limit?: number };
     const resp = await axios.get(
       `${MEETGEEK_BASE_URL}/v1/teams/${teamId}/meetings`,
       { headers: { Authorization: `Bearer ${key}` }, params: { cursor, limit } }
     );
-    return { contents: [{ uri: uri.href, text: JSON.stringify(resp.data) }] };
+    return { content: [{ type: "text", text: JSON.stringify(resp.data) }] };
   }
 );
 
