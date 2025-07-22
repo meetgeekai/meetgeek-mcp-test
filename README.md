@@ -27,34 +27,24 @@ This MCP server runs locally using Node.js. Follow these steps to set up and con
 
 ### Local Installation
 
-1. **Clone or create the project:**
+1. **Clone or download this repository:**
    ```bash
-   mkdir meetgeek-mcp-server
+   git clone <repository-url>
    cd meetgeek-mcp-server
    ```
 
 2. **Install dependencies:**
    ```bash
-   npm install @modelcontextprotocol/sdk zod
+   npm install
    ```
 
-3. **Create the server file:**
-   Create an `index.js` file with your MeetGeek MCP server implementation.
-
-4. **Set up environment variables:**
+3. **Set up environment variables:**
    Create a `.env` file in the project root:
    ```env
    MEETGEEK_API_KEY=your_meetgeek_api_key_here
    ```
 
-5. **Make the server executable:**
-   Add a shebang line to your `index.js` file:
-   ```javascript
-   #!/usr/bin/env node
-   // Your server code here...
-   ```
-
-   Then make it executable:
+4. **Make the server executable (if needed):**
    ```bash
    chmod +x index.js
    ```
@@ -137,25 +127,18 @@ Ask your AI assistant questions like:
 
 ### Local Development Setup
 
-1. **Install development dependencies:**
+1. **Install development dependencies (if not already installed):**
    ```bash
    npm install --save-dev nodemon
    ```
 
-2. **Add development scripts to package.json:**
-   ```json
-   {
-     "scripts": {
-       "start": "node index.js",
-       "dev": "nodemon index.js",
-       "test": "node index.js"
-     }
-   }
-   ```
-
-3. **Run in development mode:**
+2. **Run in development mode:**
    ```bash
    npm run dev
+   ```
+   or if you don't have dev script configured:
+   ```bash
+   npx nodemon index.js
    ```
 
 ### Testing the Server
