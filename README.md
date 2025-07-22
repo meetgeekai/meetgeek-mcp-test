@@ -90,8 +90,8 @@ Refer to your specific MCP client's documentation for configuration details. The
 ### Getting Your MeetGeek API Key
 
 1. Log in to your MeetGeek account
-2. Navigate to Settings or Account Settings
-3. Look for API Keys or Developer Settings
+2. Navigate to Integrations
+3. Look for Public API Integration
 4. Generate a new API key if you don't have one
 5. Copy the API key for use in your configuration
 
