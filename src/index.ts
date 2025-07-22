@@ -1,3 +1,12 @@
-// src/index.ts
-import "dotenv/config"; // Load environment variables :contentReference[oaicite:19]{index=19}
-import "./server";      // Bootstraps and runs the MCP server
+import "dotenv/config";
+import { MeetgeekMcpServer } from "./server.js";
+
+async function main() {
+    const server = new MeetgeekMcpServer();
+    await server.start();
+}
+
+main().catch((error) => {
+    console.error("Application failed to start:", error);
+    process.exit(1);
+});
