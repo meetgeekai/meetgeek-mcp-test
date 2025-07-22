@@ -38,15 +38,9 @@ This MCP server runs locally using Node.js. Follow these steps to set up and con
    npm install
    ```
 
-3. **Set up environment variables:**
-   Create a `.env` file in the project root:
+3. **Build the server:**
    ```env
-   MEETGEEK_API_KEY=your_meetgeek_api_key_here
-   ```
-
-4. **Make the server executable (if needed):**
-   ```bash
-   chmod +x index.js
+   npm run build
    ```
 
 ### Configure Your MCP Client
@@ -62,9 +56,10 @@ Update your `claude_desktop_config.json` file (typically located in `~/Library/A
   "mcpServers": {
     "meetgeek": {
       "command": "node",
-      "args": ["/absolute/path/to/your/meetgeek-mcp-server/index.js"],
+      "args": ["/absolute/path/to/your/meetgeek-mcp-server/dist/index.js"],
       "env": {
-        "MEETGEEK_API_KEY": "your_meetgeek_api_key_here"
+        "MEETGEEK_API_KEY": "your_meetgeek_api_key_here",
+        "MEETGEEK_BASE_URL": "https://api.meetgeek.ai"
       }
     }
   }
@@ -80,16 +75,17 @@ Refer to your specific MCP client's documentation for configuration details. The
   "mcpServers": {
     "meetgeek": {
       "command": "node",
-      "args": ["/absolute/path/to/meetgeek-mcp-server/index.js"],
+      "args": ["/absolute/path/to/meetgeek-mcp-server/dist/index.js"],
       "env": {
-        "MEETGEEK_API_KEY": "your_meetgeek_api_key_here"
+        "MEETGEEK_API_KEY": "your_meetgeek_api_key_here",
+        "MEETGEEK_BASE_URL": "https://api.meetgeek.ai"
       }
     }
   }
 }
 ```
 
-**Important:** Replace `/absolute/path/to/your/meetgeek-mcp-server/index.js` with the actual absolute path to your server file and `your_meetgeek_api_key_here` with your actual MeetGeek API key.
+**Important:** Replace `/absolute/path/to/your/meetgeek-mcp-server/` with the actual absolute path to your server file and `your_meetgeek_api_key_here` with your actual MeetGeek API key.
 
 ### Getting Your MeetGeek API Key
 
