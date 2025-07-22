@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "meetgeek": {
-      "command": "npx",
-      "args": ["ts-node", "src/server.ts"],
-      "cwd": "~/meetgeek/mcp-server/"
-    }
-  }
-}
