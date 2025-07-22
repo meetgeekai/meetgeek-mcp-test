@@ -1,0 +1,19 @@
+name: Sync Target Repository
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  push_to_target:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup ssh key
+        uses:  webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_ACTION_KEY }}
+      - name: Push to target
+        run: |
+          git remote add target git@github.com:meetgeekai/meetgeek-mcp-server.git
+          git push target git@github.com:meetgeekai/meetgeek-mcp-server.git:main --force
